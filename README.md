@@ -15,12 +15,6 @@ Erstes Projekt: **Swiss ÖV – Abfahrten & Live-Karte** → https://oev.transpo
 | `assets/og-image.png` | Social-Preview (1200×630) für Open Graph / Twitter |
 | `robots.txt`, `sitemap.xml`, `site.webmanifest` | SEO / Metadaten |
 
-## Vorschau-Screenshot
-
-Die Browser-Vorschau zeigt standardmässig eine schematische SVG-Grafik. Sobald
-`assets/preview.png` (idealerweise 1280×800, Screenshot von Swiss ÖV) existiert,
-wird automatisch der echte Screenshot angezeigt.
-
 ## Deployment
 
 Reines statisches Hosting, z. B. Cloudflare Pages (Build-Command leer, Output-Verzeichnis `/`).

@@ -94,7 +94,8 @@
     .logo svg { width: 28px; height: 28px; }
 
     main { flex: 1; display: flex; align-items: center; }
-    main .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; padding-top: 32px; padding-bottom: 32px; }
+    main .wrap { padding-top: 32px; padding-bottom: 32px; }
+    main .content { max-width: 620px; }
 
     h1 { font-size: clamp(1.9rem, 3.6vw, 2.75rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 16px; }
     .lead { color: var(--muted); font-size: 1.0625rem; margin: 0 0 28px; max-width: 46ch; }
@@ -115,11 +116,6 @@
     .button:hover { background: var(--red-dark); }
     .button:focus-visible, .project a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 
-    figure { margin: 0; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--bg); }
-    figure .screen { position: relative; aspect-ratio: 16 / 10; }
-    figure svg, figure img { position: absolute; inset: 0; width: 100%; height: 100%; }
-    figure img { object-fit: cover; object-position: top left; }
-
     footer { flex-shrink: 0; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
     footer .wrap { display: flex; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 14px; }
 
@@ -133,8 +129,7 @@
     }
     @media (max-width: 860px) {
       .wrap { padding: 0 16px; }
-      main .wrap { grid-template-columns: 1fr; gap: 0; padding-top: 24px; padding-bottom: 24px; }
-      figure { display: none; }
+      main .wrap { padding-top: 24px; padding-bottom: 24px; }
       .button { width: 100%; }
     }
   </style>
@@ -151,7 +146,7 @@
 
   <main>
     <div class="wrap">
-      <div>
+      <div class="content">
         <h1>Schweizer ÖV-Daten, verständlich aufbereitet.</h1>
         <p class="lead">Transport Radar ist ein Projekt von Studierenden. Wir sammeln offene Daten zum Schweizer ÖV, werten sie aus und machen sie sichtbar.</p>
 
@@ -164,49 +159,6 @@
         <a class="button" href="https://oev.transport-radar.ch/">Zu Swiss ÖV</a>
       </div>
 
-      <figure>
-        <div class="screen">
-            <svg viewBox="0 0 800 500" role="img" aria-label="Schematische Vorschau: Liniennetz mit Haltestellen und Verbindungsliste">
-              <rect width="800" height="500" fill="var(--bg)"/>
-              <g font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="var(--text)">
-                <rect x="0" y="0" width="250" height="500" fill="var(--bg-alt)"/>
-                <text x="24" y="40" font-weight="700" font-size="15">Abfahrten Zürich HB</text>
-                <g transform="translate(24 64)">
-                  <line x1="0" y1="0" x2="202" y2="0" stroke="var(--line)"/>
-                  <text x="0" y="26" font-weight="700">14:02</text><text x="52" y="26">IC 5 Lausanne</text><text x="202" y="26" text-anchor="end" fill="#eb0000" font-weight="700">+4'</text>
-                  <line x1="0" y1="42" x2="202" y2="42" stroke="var(--line)"/>
-                  <text x="0" y="68" font-weight="700">14:04</text><text x="52" y="68">S 8 Winterthur</text>
-                  <line x1="0" y1="84" x2="202" y2="84" stroke="var(--line)"/>
-                  <text x="0" y="110" font-weight="700">14:07</text><text x="52" y="110">IR 36 Basel SBB</text>
-                  <line x1="0" y1="126" x2="202" y2="126" stroke="var(--line)"/>
-                  <text x="0" y="152" font-weight="700">14:09</text><text x="52" y="152">S 2 Unterterzen</text><text x="202" y="152" text-anchor="end" fill="#eb0000" font-weight="700">+2'</text>
-                  <line x1="0" y1="168" x2="202" y2="168" stroke="var(--line)"/>
-                  <text x="0" y="194" font-weight="700">14:10</text><text x="52" y="194">IC 3 Chur</text>
-                  <line x1="0" y1="210" x2="202" y2="210" stroke="var(--line)"/>
-                </g>
-                <text x="24" y="320" font-weight="700" font-size="15">Pünktlichkeit heute</text>
-                <g transform="translate(24 336)" fill="var(--granite)">
-                  <rect x="0" y="40" width="18" height="60"/><rect x="26" y="28" width="18" height="72"/><rect x="52" y="18" width="18" height="82"/>
-                  <rect x="78" y="34" width="18" height="66"/><rect x="104" y="50" width="18" height="50" fill="#eb0000"/><rect x="130" y="24" width="18" height="76"/>
-                  <rect x="156" y="30" width="18" height="70"/><rect x="182" y="44" width="18" height="56"/>
-                </g>
-              </g>
-              <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M300 330 L380 300 L470 260 L560 250 L650 230 L740 210" stroke="var(--text)" stroke-width="4"/>
-                <path d="M470 260 L500 340 L590 390 L690 380" stroke="var(--granite)" stroke-width="3"/>
-                <path d="M560 250 L580 160 L650 110" stroke="var(--granite)" stroke-width="3"/>
-                <path d="M380 300 L360 200 L420 130" stroke="var(--granite)" stroke-width="3"/>
-              </g>
-              <g fill="var(--bg)" stroke="var(--text)" stroke-width="2.5">
-                <circle cx="300" cy="330" r="6"/><circle cx="380" cy="300" r="6"/><circle cx="470" cy="260" r="6"/><circle cx="650" cy="230" r="6"/><circle cx="740" cy="210" r="6"/>
-                <circle cx="500" cy="340" r="5"/><circle cx="590" cy="390" r="5"/><circle cx="690" cy="380" r="5"/><circle cx="580" cy="160" r="5"/><circle cx="650" cy="110" r="5"/><circle cx="360" cy="200" r="5"/><circle cx="420" cy="130" r="5"/>
-              </g>
-              <circle cx="560" cy="250" r="9" fill="#eb0000"/>
-              <circle cx="515" cy="255" r="5" fill="#eb0000"/>
-            </svg>
-            <img src="assets/preview.png" alt="Screenshot von Swiss ÖV: Abfahrten und Live-Karte" width="1280" height="800" onerror="this.remove()">
-        </div>
-      </figure>
     </div>
   </main>
 
