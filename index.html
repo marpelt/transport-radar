@@ -55,17 +55,13 @@
     :root {
       --red: #eb0000;
       --red-dark: #c60018;
-      --black: #000;
-      --charcoal: #212121;
-      --iron: #3d3d3d;
       --granite: #686868;
       --cloud: #e5e5e5;
       --milk: #f6f6f6;
-      --white: #fff;
 
-      --bg: var(--white);
+      --bg: #fff;
       --bg-alt: var(--milk);
-      --text: var(--black);
+      --text: #000;
       --muted: var(--granite);
       --line: var(--cloud);
     }
@@ -79,150 +75,97 @@
       }
     }
     * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
       margin: 0;
+      display: flex; flex-direction: column;
+      min-height: 100vh; min-height: 100dvh;
       background: var(--bg);
       color: var(--text);
       font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; }
-    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-    /* Header */
-    .header { border-bottom: 1px solid var(--line); }
-    .header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    header { border-bottom: 1px solid var(--line); flex-shrink: 0; }
+    header .wrap { display: flex; align-items: center; height: 64px; }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; font-size: 17px; }
     .logo svg { width: 28px; height: 28px; }
-    .header nav a { text-decoration: none; font-size: 15px; color: var(--muted); }
-    .header nav a:hover { color: var(--text); }
 
-    /* Intro */
-    .intro { padding: 64px 0 48px; }
-    .intro h1 { font-size: clamp(2rem, 4.6vw, 3.25rem); line-height: 1.1; letter-spacing: -.02em; font-weight: 700; margin: 0 0 20px; max-width: 20ch; }
-    .intro p { font-size: 1.125rem; color: var(--muted); max-width: 58ch; margin: 0 0 32px; }
+    main { flex: 1; display: flex; align-items: center; }
+    main .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; padding-top: 32px; padding-bottom: 32px; }
 
-    .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+    h1 { font-size: clamp(1.9rem, 3.6vw, 2.75rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 16px; }
+    .lead { color: var(--muted); font-size: 1.0625rem; margin: 0 0 28px; max-width: 46ch; }
+
+    .project { border-top: 2px solid var(--text); border-bottom: 1px solid var(--line); padding: 16px 0; margin: 0 0 28px; }
+    .project .meta { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    .project .meta strong { color: var(--red); }
+    .project a { font-weight: 700; font-size: 1.125rem; text-decoration: none; }
+    .project a:hover { text-decoration: underline; }
+    .project p { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+
     .button {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      display: inline-flex; align-items: center; justify-content: center;
       min-height: 48px; padding: 0 28px; border-radius: 999px;
-      font-size: 16px; font-weight: 700; text-decoration: none;
-      border: 2px solid var(--text); color: var(--text); background: transparent;
+      font-weight: 700; text-decoration: none;
+      background: var(--red); color: #fff;
     }
-    .button:hover { background: var(--bg-alt); }
-    .button.primary { background: var(--red); border-color: var(--red); color: #fff; }
-    .button.primary:hover { background: var(--red-dark); border-color: var(--red-dark); }
-    .button:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+    .button:hover { background: var(--red-dark); }
+    .button:focus-visible, .project a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 
-    /* Abfahrtstafel */
-    .board { margin-top: 56px; border-top: 2px solid var(--text); }
-    .board h2 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin: 14px 0 0; }
-    .board table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-    .board th { text-align: left; font-size: 13px; font-weight: 400; color: var(--muted); padding: 12px 16px 8px 0; border-bottom: 1px solid var(--line); }
-    .board td { padding: 18px 16px 18px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
-    .board .time { font-weight: 700; width: 90px; }
-    .board .name { font-weight: 700; font-size: 1.125rem; }
-    .board .name a { text-decoration: none; }
-    .board .name a:hover { text-decoration: underline; }
-    .board .desc { display: block; color: var(--muted); font-size: 15px; font-weight: 400; margin-top: 2px; }
-    .board .track { white-space: nowrap; }
-    .board .status { color: var(--red); font-weight: 700; white-space: nowrap; }
-    .board .status.later { color: var(--muted); font-weight: 400; }
-    .line-badge { display: inline-block; font-size: 13px; font-weight: 700; padding: 2px 7px; border: 1.5px solid currentColor; border-radius: 4px; margin-right: 8px; vertical-align: 2px; }
+    figure { margin: 0; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--bg); }
+    figure .screen { position: relative; aspect-ratio: 16 / 10; }
+    figure svg, figure img { position: absolute; inset: 0; width: 100%; height: 100%; }
+    figure img { object-fit: cover; object-position: top left; }
 
-    /* Vorschau */
-    .preview { background: var(--bg-alt); padding: 64px 0; }
-    .preview h2, .about h2 { font-size: 1.75rem; letter-spacing: -.01em; margin: 0 0 8px; }
-    .preview p.lead { color: var(--muted); margin: 0 0 28px; max-width: 60ch; }
-    .frame { border-radius: 16px; overflow: hidden; background: var(--bg); border: 1px solid var(--line); }
-    .frame .screen { position: relative; aspect-ratio: 16 / 10; }
-    .frame svg, .frame img { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .frame img { object-fit: cover; object-position: top left; }
-    .frame .footer { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 20px; border-top: 1px solid var(--line); font-size: 15px; }
-    .frame .footer a { color: var(--red); font-weight: 700; text-decoration: none; }
-    .frame .footer a:hover { text-decoration: underline; }
+    footer { flex-shrink: 0; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+    footer .wrap { display: flex; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 14px; }
 
-    /* Über */
-    .about { padding: 72px 0; }
-    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-    .about p { margin: 0 0 16px; max-width: 60ch; }
-    .about dl { margin: 0; border-top: 1px solid var(--line); }
-    .about dl div { display: grid; grid-template-columns: 140px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
-    .about dt { font-weight: 700; }
-    .about dd { margin: 0; color: var(--muted); }
-
-    /* Footer */
-    footer { background: var(--charcoal); color: #fff; padding: 40px 0; font-size: 15px; }
-    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; }
-    footer p { margin: 0; color: #bdbdbd; }
-    footer a { color: #fff; }
-
-    @media (max-width: 720px) {
+    @media (max-height: 720px) {
+      header .wrap { height: 52px; }
+      main .wrap { padding-top: 16px; padding-bottom: 16px; }
+      h1 { font-size: clamp(1.6rem, 3vw, 2.25rem); margin-bottom: 10px; }
+      .lead { margin-bottom: 18px; }
+      .project { margin-bottom: 18px; padding: 12px 0; }
+      footer .wrap { padding-top: 10px; padding-bottom: 10px; }
+    }
+    @media (max-width: 860px) {
       .wrap { padding: 0 16px; }
-      .intro { padding: 40px 0 32px; }
+      main .wrap { grid-template-columns: 1fr; gap: 0; padding-top: 24px; padding-bottom: 24px; }
+      figure { display: none; }
       .button { width: 100%; }
-      .cols { grid-template-columns: 1fr; gap: 24px; }
-      .about dl div { grid-template-columns: 1fr; gap: 2px; }
-      .board .time, .board th.time { display: none; }
-      .board .track { display: none; }
     }
   </style>
 </head>
 <body>
-  <header class="header">
+  <header>
     <div class="wrap">
       <a class="logo" href="/">
         <svg viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="4" fill="#eb0000"/><circle cx="14" cy="14" r="7.5" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="14" cy="14" r="2.5" fill="#fff"/></svg>
         Transport Radar
       </a>
-      <nav><a href="#ueber">Über das Projekt</a></nav>
     </div>
   </header>
 
   <main>
-    <section class="intro">
-      <div class="wrap">
-        <h1>Öffentliche Verkehrsdaten der Schweiz, verständlich aufbereitet.</h1>
-        <p>Transport Radar ist ein Projekt von Studierenden. Wir sammeln offene Daten zum Schweizer ÖV, werten sie aus und machen sie in Karten und Grafiken sichtbar.</p>
-        <div class="buttons">
-          <a class="button primary" href="https://oev.transport-radar.ch/">Zu Swiss ÖV</a>
-          <a class="button" href="https://transport-radar.cedis-agents.workers.dev/" rel="noopener">Entwicklungsversion</a>
+    <div class="wrap">
+      <div>
+        <h1>Schweizer ÖV-Daten, verständlich aufbereitet.</h1>
+        <p class="lead">Transport Radar ist ein Projekt von Studierenden. Wir sammeln offene Daten zum Schweizer ÖV, werten sie aus und machen sie sichtbar.</p>
+
+        <div class="project">
+          <div class="meta"><span>oev.transport-radar.ch</span><strong>In Entwicklung</strong></div>
+          <a href="https://oev.transport-radar.ch/">Swiss ÖV – Abfahrten &amp; Live-Karte (Privatprojekt)</a>
+          <p>Aktuelle Abfahrten an Schweizer Haltestellen und eine Live-Karte mit Verspätungen und Störungen, berechnet aus den offenen Daten von opentransportdata.swiss.</p>
         </div>
 
-        <div class="board">
-          <h2>Projekte</h2>
-          <table>
-            <thead>
-              <tr><th class="time">Stand</th><th>Projekt</th><th class="track">Adresse</th><th>Status</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="time">2026</td>
-                <td class="name">
-                  <span class="line-badge">ÖV</span><a href="https://oev.transport-radar.ch/">Swiss ÖV – Abfahrten &amp; Live-Karte (Privatprojekt)</a>
-                  <span class="desc">Aktuelle Abfahrten an Schweizer Haltestellen und eine Live-Karte mit Verspätungen und Störungen, berechnet aus den offenen Daten von opentransportdata.swiss.</span>
-                </td>
-                <td class="track">oev.transport-radar.ch</td>
-                <td class="status">In Entwicklung</td>
-              </tr>
-              <tr>
-                <td class="time">–</td>
-                <td class="name">Weitere Projekte<span class="desc">Jedes Projekt erhält eine eigene Subdomain</span></td>
-                <td class="track">….transport-radar.ch</td>
-                <td class="status later">Folgt</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <a class="button" href="https://oev.transport-radar.ch/">Zu Swiss ÖV</a>
       </div>
-    </section>
 
-    <section class="preview">
-      <div class="wrap">
-        <h2>Vorschau Swiss ÖV</h2>
-        <p class="lead">Ein erster Einblick. Funktionen und Darstellung ändern sich laufend.</p>
-        <figure class="frame" style="margin:0">
-          <div class="screen">
+      <figure>
+        <div class="screen">
             <svg viewBox="0 0 800 500" role="img" aria-label="Schematische Vorschau: Liniennetz mit Haltestellen und Verbindungsliste">
               <rect width="800" height="500" fill="var(--bg)"/>
               <g font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="var(--text)">
@@ -261,38 +204,16 @@
               <circle cx="560" cy="250" r="9" fill="#eb0000"/>
               <circle cx="515" cy="255" r="5" fill="#eb0000"/>
             </svg>
-            <img src="assets/preview.png" alt="Screenshot von Swiss ÖV: Abfahrten und Live-Karte" width="1280" height="800" loading="lazy" onerror="this.remove()">
-          </div>
-          <figcaption class="footer">
-            <span>oev.transport-radar.ch</span>
-            <a href="https://oev.transport-radar.ch/">Swiss ÖV – Abfahrten &amp; Live-Karte öffnen</a>
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section class="about" id="ueber">
-      <div class="wrap cols">
-        <div>
-          <h2>Über das Projekt</h2>
-          <p>Der öffentliche Verkehr in der Schweiz veröffentlicht viele seiner Daten offen: Fahrpläne, Echtzeitmeldungen, Haltestellen. Als Rohdaten sind sie aber schwer zugänglich.</p>
-          <p>Transport Radar holt diese Daten regelmässig ab, bereitet sie auf und stellt sie so dar, dass man Zusammenhänge erkennt: wo es oft Verspätungen gibt, wie sich der Takt über den Tag verändert, wie gut ein Ort angebunden ist.</p>
-          <p>Die Seite ist im Aufbau. Weitere Projekte folgen jeweils unter einer eigenen Subdomain.</p>
+            <img src="assets/preview.png" alt="Screenshot von Swiss ÖV: Abfahrten und Live-Karte" width="1280" height="800" onerror="this.remove()">
         </div>
-        <dl>
-          <div><dt>Datenquelle</dt><dd><a href="https://opentransportdata.swiss/" rel="noopener">opentransportdata.swiss</a></dd></div>
-          <div><dt>Formate</dt><dd>GTFS, GTFS-RT, SIRI, HRDF</dd></div>
-          <div><dt>Team</dt><dd>Studierende aus der Schweiz</dd></div>
-          <div><dt>Stand</dt><dd>In Entwicklung</dd></div>
-        </dl>
-      </div>
-    </section>
+      </figure>
+    </div>
   </main>
 
   <footer>
     <div class="wrap">
-      <p>© 2026 Transport Radar</p>
-      <p>Unabhängiges Studierendenprojekt, nicht mit der SBB oder anderen Transportunternehmen verbunden.</p>
+      <span>© 2026 Transport Radar</span>
+      <span>Unabhängig, nicht mit der SBB verbunden.</span>
     </div>
   </footer>
 </body>
