@@ -3,31 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Transport Radar – Öffentliche Verkehrsdaten der Schweiz, visualisiert</title>
-  <meta name="description" content="Transport Radar ist ein Studierendenprojekt, das öffentliche Mobilitätsdaten der Schweiz sammelt, verarbeitet und visualisiert. Erstes Projekt: swiss-oev – Echtzeit-Einblicke in den Schweizer ÖV.">
-  <meta name="keywords" content="ÖV Schweiz, öffentlicher Verkehr, SBB, Verspätungen, Echtzeit, Open Data, opentransportdata.swiss, Visualisierung, Fahrplan, Studierendenprojekt">
-  <meta name="author" content="Transport Radar">
+  <title>Transport Radar – Öffentliche Verkehrsdaten der Schweiz</title>
+  <meta name="description" content="Transport Radar ist ein Studierendenprojekt, das öffentliche Verkehrsdaten der Schweiz sammelt, verarbeitet und visualisiert. Erstes Projekt: swiss-oev.">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0b1220">
+  <meta name="theme-color" content="#eb0000">
   <link rel="canonical" href="https://transport-radar.ch/">
   <link rel="alternate" hreflang="de-CH" href="https://transport-radar.ch/">
-
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="manifest" href="/site.webmanifest">
+  <link rel="manifest" href="site.webmanifest">
 
-  <!-- Open Graph / Social -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Transport Radar">
   <meta property="og:locale" content="de_CH">
   <meta property="og:url" content="https://transport-radar.ch/">
-  <meta property="og:title" content="Transport Radar – Schweizer ÖV-Daten, visualisiert">
-  <meta property="og:description" content="Ein Studierendenprojekt, das öffentliche Verkehrsdaten der Schweiz sammelt, auswertet und sichtbar macht. Jetzt in Entwicklung: swiss-oev.">
+  <meta property="og:title" content="Transport Radar – Öffentliche Verkehrsdaten der Schweiz">
+  <meta property="og:description" content="Ein Studierendenprojekt, das öffentliche Verkehrsdaten der Schweiz sammelt, verarbeitet und visualisiert. In Entwicklung: swiss-oev.">
   <meta property="og:image" content="https://transport-radar.ch/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Transport Radar – Schweizer ÖV-Daten, visualisiert">
-  <meta name="twitter:description" content="Öffentliche Verkehrsdaten der Schweiz – gesammelt, verarbeitet, visualisiert.">
   <meta name="twitter:image" content="https://transport-radar.ch/assets/og-image.png">
 
   <script type="application/ld+json">
@@ -51,7 +45,6 @@
         "inLanguage": "de-CH",
         "isAccessibleForFree": true,
         "creativeWorkStatus": "In Entwicklung",
-        "description": "Interaktive Visualisierung des Schweizer öffentlichen Verkehrs auf Basis offener Daten.",
         "isPartOf": { "@id": "https://transport-radar.ch/#website" }
       }
     ]
@@ -60,256 +53,247 @@
 
   <style>
     :root {
-      --bg: #f6f7f9;
-      --surface: #ffffff;
-      --text: #0b1220;
-      --muted: #566070;
-      --line: #e3e6eb;
-      --accent: #e5332a;
-      --accent-ink: #ffffff;
-      --accent-soft: rgba(229, 51, 42, .1);
-      --ok: #1f9d55;
-      --shadow: 0 20px 50px -20px rgba(11, 18, 32, .25);
+      --red: #eb0000;
+      --red-dark: #c60018;
+      --black: #000;
+      --charcoal: #212121;
+      --iron: #3d3d3d;
+      --granite: #686868;
+      --cloud: #e5e5e5;
+      --milk: #f6f6f6;
+      --white: #fff;
+
+      --bg: var(--white);
+      --bg-alt: var(--milk);
+      --text: var(--black);
+      --muted: var(--granite);
+      --line: var(--cloud);
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #0b1220;
-        --surface: #121a2b;
-        --text: #eef1f6;
-        --muted: #9aa5b8;
-        --line: #222d42;
-        --accent: #ff4b40;
-        --accent-soft: rgba(255, 75, 64, .14);
-        --ok: #3ccf7d;
-        --shadow: 0 20px 50px -20px rgba(0, 0, 0, .6);
+        --bg: #151515;
+        --bg-alt: #1e1e1e;
+        --text: #fff;
+        --muted: #a8a8a8;
+        --line: #333;
       }
     }
     * { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      overflow-x: hidden;
+      font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; }
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-    header.top {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 0;
-    }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; letter-spacing: -.01em; }
-    .brand img { width: 30px; height: 30px; }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 13px; font-weight: 600; color: var(--muted);
-      border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px;
-      background: var(--surface);
-    }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 var(--accent); animation: pulse 2s infinite; }
-    @keyframes pulse { 0% { box-shadow: 0 0 0 0 var(--accent-soft); } 70% { box-shadow: 0 0 0 8px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
-    @media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
+    /* Header */
+    .header { border-bottom: 1px solid var(--line); }
+    .header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; font-size: 17px; }
+    .logo svg { width: 28px; height: 28px; }
+    .header nav a { text-decoration: none; font-size: 15px; color: var(--muted); }
+    .header nav a:hover { color: var(--text); }
 
-    .hero { padding: 56px 0 40px; text-align: center; }
-    .hero h1 {
-      font-size: clamp(2rem, 5.5vw, 3.6rem);
-      line-height: 1.08; letter-spacing: -.03em; margin: 18px auto 18px; max-width: 19ch;
-    }
-    .hero h1 em { font-style: normal; color: var(--accent); }
-    .hero p.lead { font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--muted); max-width: 60ch; margin: 0 auto 30px; }
-    .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 22px; border-radius: 12px; font-weight: 600; text-decoration: none;
-      border: 1px solid var(--line); background: var(--surface);
-      transition: transform .15s ease, box-shadow .15s ease;
-    }
-    .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
-    .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
-    .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    /* Intro */
+    .intro { padding: 64px 0 48px; }
+    .intro h1 { font-size: clamp(2rem, 4.6vw, 3.25rem); line-height: 1.1; letter-spacing: -.02em; font-weight: 700; margin: 0 0 20px; max-width: 20ch; }
+    .intro p { font-size: 1.125rem; color: var(--muted); max-width: 58ch; margin: 0 0 32px; }
 
-    /* Browser-Preview */
-    .preview { margin: 48px auto 0; max-width: 960px; }
-    .browser {
-      border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
-      background: var(--surface); box-shadow: var(--shadow);
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 48px; padding: 0 28px; border-radius: 999px;
+      font-size: 16px; font-weight: 700; text-decoration: none;
+      border: 2px solid var(--text); color: var(--text); background: transparent;
     }
-    .bar {
-      display: flex; align-items: center; gap: 12px; padding: 10px 14px;
-      border-bottom: 1px solid var(--line);
-    }
-    .bar .lights { display: flex; gap: 6px; flex-shrink: 0; }
-    .bar .lights i { width: 11px; height: 11px; border-radius: 50%; background: var(--line); display: block; }
-    .bar .url {
-      flex: 1; min-width: 0; font-size: 13px; color: var(--muted);
-      background: var(--bg); border-radius: 8px; padding: 5px 12px;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .screen { position: relative; aspect-ratio: 16 / 10; background: var(--bg); overflow: hidden; }
-    .screen svg.mock { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .screen img.shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top left; }
-    .screen a.overlay { position: absolute; inset: 0; z-index: 2; }
-    .caption { text-align: center; color: var(--muted); font-size: 14px; margin-top: 14px; }
+    .button:hover { background: var(--bg-alt); }
+    .button.primary { background: var(--red); border-color: var(--red); color: #fff; }
+    .button.primary:hover { background: var(--red-dark); border-color: var(--red-dark); }
+    .button:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 
-    section.block { padding: 72px 0 0; }
-    section.block h2 { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.02em; margin: 0 0 10px; }
-    section.block > .wrap > p.sub { color: var(--muted); margin: 0 0 30px; max-width: 62ch; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
-    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
-    .card .num { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: .08em; }
-    .card h3 { margin: 6px 0 6px; font-size: 1.1rem; }
-    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+    /* Abfahrtstafel */
+    .board { margin-top: 56px; border-top: 2px solid var(--text); }
+    .board h2 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin: 14px 0 0; }
+    .board table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .board th { text-align: left; font-size: 13px; font-weight: 400; color: var(--muted); padding: 12px 16px 8px 0; border-bottom: 1px solid var(--line); }
+    .board td { padding: 18px 16px 18px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .board .time { font-weight: 700; width: 90px; }
+    .board .name { font-weight: 700; font-size: 1.125rem; }
+    .board .name a { text-decoration: none; }
+    .board .name a:hover { text-decoration: underline; }
+    .board .desc { display: block; color: var(--muted); font-size: 15px; font-weight: 400; margin-top: 2px; }
+    .board .track { white-space: nowrap; }
+    .board .status { color: var(--red); font-weight: 700; white-space: nowrap; }
+    .board .status.later { color: var(--muted); font-weight: 400; }
+    .line-badge { display: inline-block; font-size: 13px; font-weight: 700; padding: 2px 7px; border: 1.5px solid currentColor; border-radius: 4px; margin-right: 8px; vertical-align: 2px; }
 
-    .projects .card { display: flex; flex-direction: column; gap: 10px; }
-    .projects .card.soon { border-style: dashed; background: transparent; }
-    .tag { align-self: flex-start; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
-    .tag.grey { background: var(--line); color: var(--muted); }
-    .projects code { font-size: 14px; color: var(--text); word-break: break-all; }
-    .projects a.more { margin-top: auto; font-weight: 600; color: var(--accent); text-decoration: none; }
-    .projects a.more:hover { text-decoration: underline; }
+    /* Vorschau */
+    .preview { background: var(--bg-alt); padding: 64px 0; }
+    .preview h2, .about h2 { font-size: 1.75rem; letter-spacing: -.01em; margin: 0 0 8px; }
+    .preview p.lead { color: var(--muted); margin: 0 0 28px; max-width: 60ch; }
+    .frame { border-radius: 16px; overflow: hidden; background: var(--bg); border: 1px solid var(--line); }
+    .frame .screen { position: relative; aspect-ratio: 16 / 10; }
+    .frame svg, .frame img { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .frame img { object-fit: cover; object-position: top left; }
+    .frame .footer { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 20px; border-top: 1px solid var(--line); font-size: 15px; }
+    .frame .footer a { color: var(--red); font-weight: 700; text-decoration: none; }
+    .frame .footer a:hover { text-decoration: underline; }
 
-    footer { margin-top: 88px; border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
-    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; }
-    footer a { color: var(--muted); }
+    /* Über */
+    .about { padding: 72px 0; }
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    .about p { margin: 0 0 16px; max-width: 60ch; }
+    .about dl { margin: 0; border-top: 1px solid var(--line); }
+    .about dl div { display: grid; grid-template-columns: 140px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .about dt { font-weight: 700; }
+    .about dd { margin: 0; color: var(--muted); }
 
-    @media (max-width: 560px) {
+    /* Footer */
+    footer { background: var(--charcoal); color: #fff; padding: 40px 0; font-size: 15px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; }
+    footer p { margin: 0; color: #bdbdbd; }
+    footer a { color: #fff; }
+
+    @media (max-width: 720px) {
       .wrap { padding: 0 16px; }
-      .hero { padding-top: 32px; }
-      .btn { width: 100%; justify-content: center; }
-      .bar .lights { display: none; }
+      .intro { padding: 40px 0 32px; }
+      .button { width: 100%; }
+      .cols { grid-template-columns: 1fr; gap: 24px; }
+      .about dl div { grid-template-columns: 1fr; gap: 2px; }
+      .board .time, .board th.time { display: none; }
+      .board .track { display: none; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="top">
-      <a class="brand" href="/" aria-label="Transport Radar Startseite">
-        <img src="assets/favicon.svg" alt="" width="30" height="30">
+  <header class="header">
+    <div class="wrap">
+      <a class="logo" href="/">
+        <svg viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="4" fill="#eb0000"/><circle cx="14" cy="14" r="7.5" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="14" cy="14" r="2.5" fill="#fff"/></svg>
         Transport Radar
       </a>
-      <span class="pill"><span class="dot" aria-hidden="true"></span>In Entwicklung</span>
-    </header>
-  </div>
+      <nav><a href="#ueber">Über das Projekt</a></nav>
+    </div>
+  </header>
 
   <main>
-    <section class="hero">
+    <section class="intro">
       <div class="wrap">
-        <span class="pill">Ein Projekt von Studierenden</span>
-        <h1>Der Schweizer ÖV – <em>in Daten sichtbar</em> gemacht.</h1>
-        <p class="lead">
-          Transport Radar sammelt öffentlich zugängliche Mobilitätsdaten der Schweiz,
-          liest sie aus, verarbeitet sie und macht sie verständlich. Unser erstes Projekt,
-          <strong>swiss-oev</strong>, zeigt Fahrten, Verspätungen und Störungen im öffentlichen Verkehr.
-        </p>
-        <div class="cta">
-          <a class="btn primary" href="https://öv.transport-radar.ch/">Zu swiss-oev &rarr;</a>
-          <a class="btn" href="https://transport-radar.cedis-agents.workers.dev/" rel="noopener">Entwicklungsvorschau ansehen</a>
+        <h1>Öffentliche Verkehrsdaten der Schweiz, verständlich aufbereitet.</h1>
+        <p>Transport Radar ist ein Projekt von Studierenden. Wir sammeln offene Daten zum Schweizer ÖV, werten sie aus und machen sie in Karten und Grafiken sichtbar.</p>
+        <div class="buttons">
+          <a class="button primary" href="https://öv.transport-radar.ch/">Zu swiss-oev</a>
+          <a class="button" href="https://transport-radar.cedis-agents.workers.dev/" rel="noopener">Entwicklungsversion</a>
         </div>
 
-        <figure class="preview">
-          <div class="browser">
-            <div class="bar">
-              <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="url">öv.transport-radar.ch</span>
-            </div>
-            <div class="screen" id="screen">
-              <!-- Schematische Grafik; wird von assets/preview.png überdeckt, sobald ein Screenshot existiert -->
-              <svg class="mock" viewBox="0 0 800 500" role="img" aria-label="Schematische Vorschau von swiss-oev: Karte der Schweiz mit ÖV-Linien und Verspätungsanzeige">
-                <rect width="800" height="500" fill="var(--bg)"/>
-                <rect x="20" y="20" width="200" height="460" rx="12" fill="var(--surface)" stroke="var(--line)"/>
-                <rect x="40" y="44" width="120" height="12" rx="6" fill="var(--text)" opacity=".8"/>
-                <rect x="40" y="70" width="150" height="8" rx="4" fill="var(--muted)" opacity=".4"/>
-                <g fill="var(--muted)" opacity=".35">
-                  <rect x="40" y="110" width="160" height="40" rx="8"/>
-                  <rect x="40" y="160" width="160" height="40" rx="8"/>
-                  <rect x="40" y="210" width="160" height="40" rx="8"/>
+        <div class="board">
+          <h2>Projekte</h2>
+          <table>
+            <thead>
+              <tr><th class="time">Stand</th><th>Projekt</th><th class="track">Adresse</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="time">2026</td>
+                <td class="name">
+                  <a href="https://öv.transport-radar.ch/"><span class="line-badge">ÖV</span>swiss-oev</a>
+                  <span class="desc">Verbindungen, Verspätungen und Störungen im Schweizer ÖV</span>
+                </td>
+                <td class="track">öv.transport-radar.ch</td>
+                <td class="status">In Entwicklung</td>
+              </tr>
+              <tr>
+                <td class="time">–</td>
+                <td class="name">Weitere Projekte<span class="desc">Jedes Projekt erhält eine eigene Subdomain</span></td>
+                <td class="track">….transport-radar.ch</td>
+                <td class="status later">Folgt</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="preview">
+      <div class="wrap">
+        <h2>Vorschau swiss-oev</h2>
+        <p class="lead">Ein erster Einblick. Funktionen und Darstellung ändern sich laufend.</p>
+        <figure class="frame" style="margin:0">
+          <div class="screen">
+            <svg viewBox="0 0 800 500" role="img" aria-label="Schematische Vorschau: Liniennetz mit Haltestellen und Verbindungsliste">
+              <rect width="800" height="500" fill="var(--bg)"/>
+              <g font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="var(--text)">
+                <rect x="0" y="0" width="250" height="500" fill="var(--bg-alt)"/>
+                <text x="24" y="40" font-weight="700" font-size="15">Abfahrten Zürich HB</text>
+                <g transform="translate(24 64)">
+                  <line x1="0" y1="0" x2="202" y2="0" stroke="var(--line)"/>
+                  <text x="0" y="26" font-weight="700">14:02</text><text x="52" y="26">IC 5 Lausanne</text><text x="202" y="26" text-anchor="end" fill="#eb0000" font-weight="700">+4'</text>
+                  <line x1="0" y1="42" x2="202" y2="42" stroke="var(--line)"/>
+                  <text x="0" y="68" font-weight="700">14:04</text><text x="52" y="68">S 8 Winterthur</text>
+                  <line x1="0" y1="84" x2="202" y2="84" stroke="var(--line)"/>
+                  <text x="0" y="110" font-weight="700">14:07</text><text x="52" y="110">IR 36 Basel SBB</text>
+                  <line x1="0" y1="126" x2="202" y2="126" stroke="var(--line)"/>
+                  <text x="0" y="152" font-weight="700">14:09</text><text x="52" y="152">S 2 Unterterzen</text><text x="202" y="152" text-anchor="end" fill="#eb0000" font-weight="700">+2'</text>
+                  <line x1="0" y1="168" x2="202" y2="168" stroke="var(--line)"/>
+                  <text x="0" y="194" font-weight="700">14:10</text><text x="52" y="194">IC 3 Chur</text>
+                  <line x1="0" y1="210" x2="202" y2="210" stroke="var(--line)"/>
                 </g>
-                <rect x="40" y="110" width="4" height="40" rx="2" fill="var(--accent)"/>
-                <rect x="40" y="160" width="4" height="40" rx="2" fill="var(--ok)"/>
-                <rect x="40" y="210" width="4" height="40" rx="2" fill="var(--ok)"/>
-                <g transform="translate(40 290)">
-                  <rect width="160" height="90" rx="8" fill="none" stroke="var(--line)"/>
-                  <g fill="var(--accent)">
-                    <rect x="14" y="56" width="14" height="20" rx="2" opacity=".5"/>
-                    <rect x="38" y="40" width="14" height="36" rx="2" opacity=".6"/>
-                    <rect x="62" y="26" width="14" height="50" rx="2"/>
-                    <rect x="86" y="46" width="14" height="30" rx="2" opacity=".6"/>
-                    <rect x="110" y="60" width="14" height="16" rx="2" opacity=".5"/>
-                    <rect x="134" y="52" width="14" height="24" rx="2" opacity=".5"/>
-                  </g>
+                <text x="24" y="320" font-weight="700" font-size="15">Pünktlichkeit heute</text>
+                <g transform="translate(24 336)" fill="var(--granite)">
+                  <rect x="0" y="40" width="18" height="60"/><rect x="26" y="28" width="18" height="72"/><rect x="52" y="18" width="18" height="82"/>
+                  <rect x="78" y="34" width="18" height="66"/><rect x="104" y="50" width="18" height="50" fill="#eb0000"/><rect x="130" y="24" width="18" height="76"/>
+                  <rect x="156" y="30" width="18" height="70"/><rect x="182" y="44" width="18" height="56"/>
                 </g>
-                <rect x="240" y="20" width="540" height="460" rx="12" fill="var(--surface)" stroke="var(--line)"/>
-                <path d="M300 300 C 320 230, 380 210, 430 190 S 540 150, 600 170 S 720 210, 740 260 S 700 360, 640 380 S 520 410, 450 400 S 330 380, 300 300 Z" fill="var(--accent-soft)" stroke="var(--accent)" stroke-opacity=".35" stroke-width="2"/>
-                <g fill="none" stroke-width="3" stroke-linecap="round">
-                  <path d="M330 300 L420 260 L520 240 L610 230 L700 260" stroke="var(--accent)"/>
-                  <path d="M420 260 L470 330 L560 360 L640 340" stroke="var(--muted)" opacity=".6"/>
-                  <path d="M520 240 L540 180 L600 175" stroke="var(--muted)" opacity=".6"/>
-                </g>
-                <g fill="var(--surface)" stroke="var(--text)" stroke-width="2.5">
-                  <circle cx="330" cy="300" r="6"/><circle cx="420" cy="260" r="6"/><circle cx="520" cy="240" r="7"/>
-                  <circle cx="610" cy="230" r="6"/><circle cx="700" cy="260" r="6"/><circle cx="470" cy="330" r="5"/>
-                  <circle cx="560" cy="360" r="5"/><circle cx="640" cy="340" r="5"/><circle cx="600" cy="175" r="5"/>
-                </g>
-                <circle cx="565" cy="235" r="7" fill="var(--accent)"/>
-                <circle cx="565" cy="235" r="16" fill="var(--accent)" opacity=".18"/>
-              </svg>
-              <img class="shot" src="assets/preview.png" alt="Screenshot von swiss-oev" width="1280" height="800" loading="lazy" onerror="this.remove()">
-              <a class="overlay" href="https://öv.transport-radar.ch/" aria-label="swiss-oev öffnen"></a>
-            </div>
+              </g>
+              <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M300 330 L380 300 L470 260 L560 250 L650 230 L740 210" stroke="var(--text)" stroke-width="4"/>
+                <path d="M470 260 L500 340 L590 390 L690 380" stroke="var(--granite)" stroke-width="3"/>
+                <path d="M560 250 L580 160 L650 110" stroke="var(--granite)" stroke-width="3"/>
+                <path d="M380 300 L360 200 L420 130" stroke="var(--granite)" stroke-width="3"/>
+              </g>
+              <g fill="var(--bg)" stroke="var(--text)" stroke-width="2.5">
+                <circle cx="300" cy="330" r="6"/><circle cx="380" cy="300" r="6"/><circle cx="470" cy="260" r="6"/><circle cx="650" cy="230" r="6"/><circle cx="740" cy="210" r="6"/>
+                <circle cx="500" cy="340" r="5"/><circle cx="590" cy="390" r="5"/><circle cx="690" cy="380" r="5"/><circle cx="580" cy="160" r="5"/><circle cx="650" cy="110" r="5"/><circle cx="360" cy="200" r="5"/><circle cx="420" cy="130" r="5"/>
+              </g>
+              <circle cx="560" cy="250" r="9" fill="#eb0000"/>
+              <circle cx="515" cy="255" r="5" fill="#eb0000"/>
+            </svg>
+            <img src="assets/preview.png" alt="Screenshot von swiss-oev" width="1280" height="800" loading="lazy" onerror="this.remove()">
           </div>
-          <figcaption class="caption">Vorschau von swiss-oev – das Projekt befindet sich in aktiver Entwicklung.</figcaption>
+          <figcaption class="footer">
+            <span>öv.transport-radar.ch</span>
+            <a href="https://öv.transport-radar.ch/">Öffnen</a>
+          </figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="block" id="vorgehen">
-      <div class="wrap">
-        <h2>Von offenen Daten zu verständlichen Bildern</h2>
-        <p class="sub">Der öffentliche Verkehr der Schweiz produziert jeden Tag Millionen von Datenpunkten. Wir machen daraus etwas, das man auf einen Blick versteht.</p>
-        <div class="grid">
-          <article class="card"><div class="num">01</div><h3>Sammeln</h3><p>Fahrpläne, Echtzeitdaten und Störungsmeldungen aus offenen Quellen wie opentransportdata.swiss.</p></article>
-          <article class="card"><div class="num">02</div><h3>Auslesen</h3><p>Formate wie GTFS, GTFS-RT, SIRI und HRDF werden geparst und vereinheitlicht.</p></article>
-          <article class="card"><div class="num">03</div><h3>Verarbeiten</h3><p>Verspätungen, Pünktlichkeit und Auslastung werden berechnet, aggregiert und historisiert.</p></article>
-          <article class="card"><div class="num">04</div><h3>Visualisieren</h3><p>Interaktive Karten und Diagramme machen Muster und Zusammenhänge sichtbar.</p></article>
+    <section class="about" id="ueber">
+      <div class="wrap cols">
+        <div>
+          <h2>Über das Projekt</h2>
+          <p>Der öffentliche Verkehr in der Schweiz veröffentlicht viele seiner Daten offen: Fahrpläne, Echtzeitmeldungen, Haltestellen. Als Rohdaten sind sie aber schwer zugänglich.</p>
+          <p>Transport Radar holt diese Daten regelmässig ab, bereitet sie auf und stellt sie so dar, dass man Zusammenhänge erkennt: wo es oft Verspätungen gibt, wie sich der Takt über den Tag verändert, wie gut ein Ort angebunden ist.</p>
+          <p>Die Seite ist im Aufbau. Weitere Projekte folgen jeweils unter einer eigenen Subdomain.</p>
         </div>
-      </div>
-    </section>
-
-    <section class="block projects" id="projekte">
-      <div class="wrap">
-        <h2>Projekte</h2>
-        <p class="sub">Jedes Projekt erhält eine eigene Subdomain unter transport-radar.ch.</p>
-        <div class="grid">
-          <article class="card">
-            <span class="tag">In Entwicklung</span>
-            <h3>swiss-oev</h3>
-            <p>Echtzeit-Einblicke in den Schweizer öffentlichen Verkehr: Verbindungen, Verspätungen und Störungen auf einer Karte.</p>
-            <code>öv.transport-radar.ch</code>
-            <a class="more" href="https://öv.transport-radar.ch/">Projekt öffnen &rarr;</a>
-          </article>
-          <article class="card soon">
-            <span class="tag grey">Demnächst</span>
-            <h3>Weitere Projekte</h3>
-            <p>Weitere Auswertungen rund um Mobilität und öffentliche Daten in der Schweiz sind in Planung.</p>
-            <code>…transport-radar.ch</code>
-          </article>
-        </div>
+        <dl>
+          <div><dt>Datenquelle</dt><dd><a href="https://opentransportdata.swiss/" rel="noopener">opentransportdata.swiss</a></dd></div>
+          <div><dt>Formate</dt><dd>GTFS, GTFS-RT, SIRI, HRDF</dd></div>
+          <div><dt>Team</dt><dd>Studierende aus der Schweiz</dd></div>
+          <div><dt>Stand</dt><dd>In Entwicklung</dd></div>
+        </dl>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="wrap">
-      <span>&copy; <span id="year">2026</span> Transport Radar · Ein Studierendenprojekt</span>
-      <span>Datenquelle: <a href="https://opentransportdata.swiss/" rel="noopener">opentransportdata.swiss</a></span>
+      <p>© 2026 Transport Radar</p>
+      <p>Unabhängiges Studierendenprojekt, nicht mit der SBB oder anderen Transportunternehmen verbunden.</p>
     </div>
   </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-  </script>
 </body>
 </html>

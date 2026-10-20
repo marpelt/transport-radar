@@ -2,7 +2,7 @@
   "name": "Transport Radar",
   "short_name": "Transport Radar",
   "icons": [{ "src": "/assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" }],
-  "theme_color": "#0b1220",
-  "background_color": "#0b1220",
+  "theme_color": "#eb0000",
+  "background_color": "#ffffff",
   "display": "browser"
 }
