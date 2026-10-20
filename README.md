@@ -3,7 +3,7 @@
 Statische Landing Page für **Transport Radar**, ein Studierendenprojekt, das öffentliche
 Verkehrsdaten der Schweiz sammelt, verarbeitet und visualisiert.
 
-Erstes Projekt: **swiss-oev** → https://öv.transport-radar.ch
+Erstes Projekt: **Swiss ÖV – Abfahrten & Live-Karte** → https://oev.transport-radar.ch
 (aktuell in Entwicklung unter https://transport-radar.cedis-agents.workers.dev/).
 
 ## Inhalt
@@ -18,10 +18,10 @@ Erstes Projekt: **swiss-oev** → https://öv.transport-radar.ch
 ## Vorschau-Screenshot
 
 Die Browser-Vorschau zeigt standardmässig eine schematische SVG-Grafik. Sobald
-`assets/preview.png` (idealerweise 1280×800, Screenshot von swiss-oev) existiert,
+`assets/preview.png` (idealerweise 1280×800, Screenshot von Swiss ÖV) existiert,
 wird automatisch der echte Screenshot angezeigt.
 
 ## Deployment
 
 Reines statisches Hosting, z. B. Cloudflare Pages (Build-Command leer, Output-Verzeichnis `/`).
-Hinweis: `öv.transport-radar.ch` entspricht in DNS dem Punycode `xn--v-tga.transport-radar.ch`.
+Alle Links zeigen direkt auf `oev.transport-radar.ch` (nicht auf `öv.`, das nur weiterleitet).
