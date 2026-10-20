@@ -100,12 +100,15 @@
     h1 { font-size: clamp(1.9rem, 3.6vw, 2.75rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 16px; }
     .lead { color: var(--muted); font-size: 1.0625rem; margin: 0 0 28px; max-width: 46ch; }
 
-    .project { border-top: 2px solid var(--text); border-bottom: 1px solid var(--line); padding: 16px 0; margin: 0 0 28px; }
+    .projects { border-top: 2px solid var(--text); margin: 0 0 28px; }
+    .project { border-bottom: 1px solid var(--line); padding: 16px 0; }
     .project .meta { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
     .project .meta strong { color: var(--red); }
     .project a { font-weight: 700; font-size: 1.125rem; text-decoration: none; }
     .project a:hover { text-decoration: underline; }
     .project p { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+    .project.disabled .meta strong { color: var(--muted); }
+    .project .link-disabled { font-weight: 700; font-size: 1.125rem; color: var(--muted); cursor: not-allowed; }
 
     .button {
       display: inline-flex; align-items: center; justify-content: center;
@@ -124,13 +127,20 @@
       main .wrap { padding-top: 16px; padding-bottom: 16px; }
       h1 { font-size: clamp(1.6rem, 3vw, 2.25rem); margin-bottom: 10px; }
       .lead { margin-bottom: 18px; }
-      .project { margin-bottom: 18px; padding: 12px 0; }
+      .projects { margin-bottom: 18px; }
+      .project { padding: 12px 0; }
       footer .wrap { padding-top: 10px; padding-bottom: 10px; }
     }
     @media (max-width: 860px) {
       .wrap { padding: 0 16px; }
       main .wrap { padding-top: 24px; padding-bottom: 24px; }
       .button { width: 100%; }
+    }
+    @media (max-width: 860px) and (max-height: 720px) {
+      .button { display: none; }
+      .projects { margin-bottom: 0; }
+      .project p { font-size: 14px; }
+      main .wrap { padding-top: 12px; padding-bottom: 12px; }
     }
   </style>
 </head>
@@ -148,12 +158,20 @@
     <div class="wrap">
       <div class="content">
         <h1>Schweizer ÖV-Daten, verständlich aufbereitet.</h1>
-        <p class="lead">Transport Radar ist ein Projekt von Studierenden. Wir sammeln offene Daten zum Schweizer ÖV, werten sie aus und machen sie sichtbar.</p>
+        <p class="lead">Ein Projekt von Studierenden: Wir sammeln offene Daten zum Schweizer ÖV, werten sie aus und machen sie sichtbar.</p>
 
-        <div class="project">
-          <div class="meta"><span>oev.transport-radar.ch</span><strong>In Entwicklung</strong></div>
-          <a href="https://oev.transport-radar.ch/">Swiss ÖV – Abfahrten &amp; Live-Karte (Privatprojekt)</a>
-          <p>Aktuelle Abfahrten an Schweizer Haltestellen und eine Live-Karte mit Verspätungen und Störungen, berechnet aus den offenen Daten von opentransportdata.swiss.</p>
+        <div class="projects">
+          <div class="project">
+            <div class="meta"><span>oev.transport-radar.ch</span><strong>In Entwicklung</strong></div>
+            <a href="https://oev.transport-radar.ch/">Swiss ÖV – Abfahrten &amp; Live-Karte (Privatprojekt)</a>
+            <p>Aktuelle Abfahrten an Schweizer Haltestellen und eine Live-Karte mit Verspätungen und Störungen, berechnet aus den offenen Daten von opentransportdata.swiss.</p>
+          </div>
+          <div class="project disabled">
+            <div class="meta"><span>3d.transport-radar.ch</span><strong>Demnächst</strong></div>
+            <!-- Noch nicht live: wird zu <a href="https://3d.transport-radar.ch/">, sobald die Seite online ist -->
+            <span class="link-disabled" role="link" aria-disabled="true">Swiss ÖV 3D – Der Schweizer ÖV als 3D-Karte (Privatprojekt)</span>
+            <p>Züge, Busse und Trams der ganzen Schweiz in Echtzeit auf einer dreidimensionalen Karte mit Gelände und Bergen.</p>
+          </div>
         </div>
 
         <a class="button" href="https://oev.transport-radar.ch/">Zu Swiss ÖV</a>
@@ -164,7 +182,6 @@
 
   <footer>
     <div class="wrap">
-      <span>© 2026 Transport Radar</span>
       <span>Unabhängig, nicht mit der SBB verbunden.</span>
     </div>
   </footer>
